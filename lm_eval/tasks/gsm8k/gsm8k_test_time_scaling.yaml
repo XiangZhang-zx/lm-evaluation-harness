@@ -1,0 +1,25 @@
+include: gsm8k.yaml  # 继承原始任务配置
+task: gsm8k_test_time_scaling
+repeats: 5  # 每个样本生成5次
+generation_kwargs:
+  until:
+    - "Question:"
+    - "</s>"
+    - "<|im_end|>"
+  do_sample: true
+  max_gen_toks: 512  # GSM8K需要更长的推理过程
+filter_list:
+  - name: "single"  # 单次回答基线 (samples=1)
+    filter:
+      - function: "regex"
+        regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
+      - function: "take_first"
+  - name: "maj@5"   # 5次多数投票 (samples=5)
+    filter:
+      - function: "take_first_k"
+        k: 5
+      - function: "regex"
+        regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
+      - function: "majority_vote"
+      - function: "take_first"
+

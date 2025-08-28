@@ -1,0 +1,27 @@
+include: anli_r1.yaml  # 继承原始任务配置
+task: anli_r1_test_time_scaling
+repeats: 32  # 每个样本生成32次
+generation_kwargs:
+  do_sample: true
+  temperature: 0.3
+  max_gen_toks: 10  # ANLI是多选题，答案很短
+filter_list:
+  - name: "single"  # 单次回答基线
+    filter:
+      - function: "take_first"
+  - name: "maj@32"  # 32次多数投票
+    filter:
+      - function: "majority_vote"
+      - function: "take_first"
+  - name: "maj@16"  # 前16次多数投票
+    filter:
+      - function: "take_first_k"
+        k: 16
+      - function: "majority_vote"
+      - function: "take_first"
+  - name: "maj@8"   # 前8次多数投票
+    filter:
+      - function: "take_first_k"
+        k: 8
+      - function: "majority_vote"
+      - function: "take_first"
