@@ -1,4 +1,4 @@
-include: bbh_cot_zeroshot_causal_judgement.yaml  # 继承原始任务配置
+include: cot_zeroshot/causal_judgement.yaml  # 继承原始任务配置
 task: bbh_cot_zeroshot_causal_judgement_tts
 repeats: 5  # 每个样本生成5次
 generation_kwargs:
