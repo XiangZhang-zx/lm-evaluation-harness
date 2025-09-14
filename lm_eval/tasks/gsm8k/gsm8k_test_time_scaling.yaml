@@ -1,6 +1,6 @@
 include: gsm8k.yaml  # 继承原始任务配置
 task: gsm8k_test_time_scaling
-repeats: 100  # 每个样本生成100次
+repeats: 1000  # 每个样本生成1000次
 generation_kwargs:
   until:
     - "Question:"
@@ -46,10 +46,34 @@ filter_list:
         regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
       - function: "majority_vote"
       - function: "take_first"
-  - name: "maj@100" # 100次多数投票 (samples=100) - 使用所有样本
+  - name: "maj@100" # 100次多数投票 (samples=100)
     filter:
       - function: "take_first_k"
         k: 100
+      - function: "regex"
+        regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
+      - function: "majority_vote"
+      - function: "take_first"
+  - name: "maj@200" # 200次多数投票 (samples=200)
+    filter:
+      - function: "take_first_k"
+        k: 200
+      - function: "regex"
+        regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
+      - function: "majority_vote"
+      - function: "take_first"
+  - name: "maj@500" # 500次多数投票 (samples=500)
+    filter:
+      - function: "take_first_k"
+        k: 500
+      - function: "regex"
+        regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
+      - function: "majority_vote"
+      - function: "take_first"
+  - name: "maj@1000" # 1000次多数投票 (samples=1000) - 使用所有样本
+    filter:
+      - function: "take_first_k"
+        k: 1000
       - function: "regex"
         regex_pattern: "#### (\\-?[0-9\\.\\,]+)"
       - function: "majority_vote"
