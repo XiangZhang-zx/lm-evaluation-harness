@@ -1,0 +1,18 @@
+group: minerva_math_cot
+task:
+  - minerva_math_algebra_cot
+  - minerva_math_counting_and_prob_cot
+  - minerva_math_geometry_cot
+  - minerva_math_intermediate_algebra_cot
+  - minerva_math_num_theory_cot
+  - minerva_math_prealgebra_cot
+  - minerva_math_precalc_cot
+aggregate_metric_list:
+  - metric: exact_match
+    aggregation: mean
+    weight_by_size: true
+  - metric: math_verify
+    aggregation: mean
+    weight_by_size: true
+metadata:
+  version: 3.0

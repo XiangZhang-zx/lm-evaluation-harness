@@ -1,0 +1,11 @@
+include: minerva_math_algebra.yaml
+tag:
+  - math_word_problems
+  - chain_of_thought
+task: minerva_math_algebra_cot
+process_docs: !function utils_cot.process_docs
+doc_to_text: !function utils_cot.doc_to_text_cot
+process_results: !function utils_cot.process_results
+fewshot_config:
+  sampler: first_n
+  samples: !function utils_cot.list_fewshot_samples_cot
