@@ -7,7 +7,7 @@ generation_kwargs:
     - "</s>"
     - "<|im_end|>"
   do_sample: true
-  max_gen_toks: 512  # GSM8K需要更长的推理过程
+  max_gen_toks: 1024  # GSM8K需要更长的推理过程
 filter_list:
   - name: "single"  # 单次回答基线 (samples=1)
     filter:
