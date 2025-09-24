@@ -7,6 +7,8 @@ generation_kwargs:
     - "</s>"
     - "<|im_end|>"
   do_sample: true
+  temperature: 0.2  # 设置为正数以启用采样，产生多样化答案
+  top_p: 0.95      # 添加nucleus sampling
   max_gen_toks: 1024  # GSM8K需要更长的推理过程
 filter_list:
   - name: "single"  # 单次回答基线 (samples=1)
